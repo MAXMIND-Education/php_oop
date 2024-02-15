@@ -1,33 +1,31 @@
 <?php
 
-abstract class Shape {
-    protected string $color;
+abstract class Vehicle {
+    // Abstract method
+    abstract public function startEngine();
 
-    public function __construct(string $color) {
-        $this->color = $color;
-    }
-
-    abstract public function getArea(): float;
-
-    public function getColor(): string {
-        return $this->color;
+    // Concrete method
+    public function stopEngine() {
+        echo "Engine stopped.\n";
     }
 }
 
-class Circle extends Shape {
-    protected float $radius;
-
-    public function __construct(string $color, float $radius) {
-        parent::__construct($color);
-        $this->radius = $radius;
-    }
-
-    public function getArea(): float {
-        return pi() * $this->radius * $this->radius;
+class Car extends Vehicle {
+    public function startEngine() {
+        echo "Engine started. Vroom vroom!\n";
     }
 }
 
-$circle = new Circle("red", 5);
-echo "Color: " . $circle->getColor() . "\n";
-echo "Area: " . $circle->getArea(); // Output: Color: red, Area: 78.539816339745
+class Motorcycle extends Vehicle {
+    public function startEngine() {
+        echo "Engine started. Vroooom!\n";
+    }
+}
 
+$car = new Car();
+$car->startEngine();  // Output: Engine started. Vroom vroom!
+$car->stopEngine();   // Output: Engine stopped.
+
+$motorcycle = new Motorcycle();
+$motorcycle->startEngine();  // Output: Engine started. Vroooom!
+$motorcycle->stopEngine();   // Output: Engine stopped.
