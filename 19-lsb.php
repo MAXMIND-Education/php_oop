@@ -1,5 +1,42 @@
 <?php
 
+//Problem Before Late Static Binding
+class A {
+    public static function who() {
+        echo __CLASS__;
+    }
+    public static function test() {
+        self::who();
+    }
+}
+
+class B extends A {
+    public static function who() {
+        echo __CLASS__;
+    }
+}
+
+B::test();  // Outputs: A
+
+//Solution with Late Static Binding
+class A {
+    public static function who() {
+        echo __CLASS__;
+    }
+    public static function test() {
+        static::who(); // Use static instead of self
+    }
+}
+
+class B extends A {
+    public static function who() {
+        echo __CLASS__;
+    }
+}
+
+B::test();  // Outputs: B
+//-------------------------------------------------------------------
+
 // class ParentClass {
 //     protected static string $className = "ParentClass";
 
